@@ -19,3 +19,8 @@ class TaskForm(forms.ModelForm):
     class Meta:
         model = Task
         fields ='__all__'
+
+class SubForm(forms.ModelForm):
+    class Meta:
+        model = SubTask
+        fields =['sub_task']

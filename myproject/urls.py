@@ -17,7 +17,7 @@ from unicodedata import name
 from django import views
 from django.contrib import admin
 from django.urls import path
-from task.views import delete, home, login_request,task_list,task,task_details,edit
+from task.views import delete, home, login_request, subtask,task_list,task,task_details,edit
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,7 +27,8 @@ urlpatterns = [
     path('task',view=task,name="task"),
     path('taskdetails/<int:id>',view=task_details,name="taskdetails"),
     path('delete/<int:id>',view=delete),
-    path('edit/<int:id>',view=edit,name="edit")
+    path('edit/<int:id>',view=edit,name="edit"),
+    path('subtask',view=subtask,name="subtask")
 
 
 ]

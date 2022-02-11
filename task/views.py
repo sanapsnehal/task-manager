@@ -8,7 +8,7 @@ from .models import Task,SubTask
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login
-from .form import TaskForm, UserRegisterForm
+from .form import SubForm, TaskForm, UserRegisterForm
 from django.core.paginator import Paginator
 
 
@@ -38,16 +38,33 @@ def task_list(request):
     #     form=TaskForm()
     #     return render(request, 'tasklist.html',{'form':form})
 
+def subtask(request):
+    context={}
+    form =SubForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        # return redirect('')  
+    context['form']= form
+    return render(request, "subtask.html", context)
+
+
 def task(request):
-    tasks = Task.objects.all()
-    # paginator=Paginator(task,2)
-    # page_number=request.GET.get('page')
-    # taskfinal=paginator.get_page(page_number)
-    return render(request, "task.html",{'tasks':tasks})
+    task_list = Task.objects.all().order_by('id')
+    paginator=Paginator(task_list,1)
+    page_number=request.GET.get('page')
+    page_obj=paginator.get_page(page_number)
+    return render(request, "task.html",{'page_obj':page_obj})
 
 def task_details(request,id):
     task = Task.objects.get(id=id)
-    return render(request, "taskdetails.html",{'task':task})
+    subtask = SubTask.objects.filter(task_id = id)
+    return render(request, "taskdetails.html",{'task':task, 'subtask':subtask})
+
+    # form=SubForm(instance=subtask)
+    # if request.method == 'POST':
+    #    form=SubForm(request.POST, instance=subtask)
+    #    if form.is_valid():
+    #       form.save() 
 
 def delete(request,id):
     task=Task.objects.get(id=id)
@@ -56,9 +73,16 @@ def delete(request,id):
 
 def edit(request,id):
     task=Task.objects.get(id=id)
-    task.task_name=request.POST.get('task_name')
-    task.save()
-    return HttpResponse('edit')
+    form=TaskForm(instance=task)
+    if request.method == 'POST':
+        form=TaskForm(request.POST, instance=task)
+        if form.is_valid():
+           form.save()
+           return redirect('/')
+    context={'form':form}
+
+    return render(request,"tasklist.html",context)
+
 
 
 

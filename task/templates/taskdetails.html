@@ -8,7 +8,11 @@
                         <tr>
                             <th scope="col">task_name</th>
                             <th scope="col">id</th>
-                            
+                            <ol>
+                                {% for st in subtask %}
+                                    <li>{{st.sub_task}}</li>
+                                {% endfor %}
+                            </ol>
                         </tr>
                     </thead>
                     <tbody>
@@ -24,6 +28,17 @@
         
 
         </div>
+    <!-- <form action="" method="POST">
+        {% csrf_token %}
+        <br>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <h1>Sub Task</h1>
+{{form.as_p}}
+<input type="submit" value="Add">
+</form> -->
 </center>
 {% endblock %}
 
