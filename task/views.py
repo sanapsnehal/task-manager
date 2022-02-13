@@ -19,6 +19,7 @@ def home(request):
 
 def task_list(request):
     context ={}
+    print(request.POST)
     form =TaskForm(request.POST or None)
     if form.is_valid():
         form.save()
@@ -50,10 +51,10 @@ def subtask(request):
 
 def task(request):
     task_list = Task.objects.all().order_by('id')
-    paginator=Paginator(task_list,1)
+    paginator=Paginator(task_list,4)  
     page_number=request.GET.get('page')
     page_obj=paginator.get_page(page_number)
-    return render(request, "task.html",{'page_obj':page_obj})
+    return render(request, "task.html", {'page_obj':page_obj})
 
 def task_details(request,id):
     task = Task.objects.get(id=id)
