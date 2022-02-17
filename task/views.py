@@ -50,16 +50,23 @@ def subtask(request):
 
 
 def task(request):
-    task_list = Task.objects.all().order_by('id')
-    paginator=Paginator(task_list,4)  
-    page_number=request.GET.get('page')
-    page_obj=paginator.get_page(page_number)
-    return render(request, "task.html", {'page_obj':page_obj})
+    if request.user.is_authenticated:
+        # task_list = Task.objects.all().order_by('-id')
+        task_list = Task.objects.filter(owner_id = request.user)
+        paginator=Paginator(task_list,4)  
+        page_number=request.GET.get('page')
+        page_obj=paginator.get_page(page_number)
+        return render(request, "task.html", {'page_obj':page_obj,'user':request.user})
+    else:
+        return HttpResponseRedirect('/login')
 
 def task_details(request,id):
-    task = Task.objects.get(id=id)
+    task=Task.objects.get(id=id)
     subtask = SubTask.objects.filter(task_id = id)
-    return render(request, "taskdetails.html",{'task':task, 'subtask':subtask})
+    stform =SubForm(request.POST or None)
+    if stform.is_valid():
+        stform.save()
+    return render(request, "taskdetails.html",{'task':task, 'subtask':subtask,'stform':stform})
 
     # form=SubForm(instance=subtask)
     # if request.method == 'POST':

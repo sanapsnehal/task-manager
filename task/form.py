@@ -23,4 +23,4 @@ class TaskForm(forms.ModelForm):
 class SubForm(forms.ModelForm):
     class Meta:
         model = SubTask
-        fields =['sub_task']
+        fields  = ['sub_task']

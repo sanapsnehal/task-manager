@@ -1,7 +1,8 @@
 {% include 'base.html' %}
 {% block content %}
     <center>
-        <h1>Task List</h1> 
+        <h1>Task List</h1>
+        {{user}}
         <div class="container">
             <a href="{% url 'tasklist' %}"><button>Create</button></a><span style="width: 10px"></span>
                 <table class="table">
