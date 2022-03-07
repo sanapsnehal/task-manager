@@ -5,11 +5,17 @@
         {{user}}
         <div class="container">
             <a href="{% url 'tasklist' %}"><button>Create</button></a><span style="width: 10px"></span>
+            {% comment %} {{taform.status}} {% endcomment %}
+           
+            <ol>
+            <a href="?status=1">Open</a>
+            <a href="?status=2">Close</a>
+            </ol>
+            
                 <table class="table">
                     <thead class="thead-dark">
                         <tr>
                             <th scope="col">task_name</th>
-                            
                         </tr>
                     </thead>
                     <tbody>

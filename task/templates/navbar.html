@@ -6,43 +6,17 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-         
-          
-
-
-
-
-            
-          </li>
-          <!-- <li class="nav-item dropdown">
-            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Client</a>
-            <div class="dropdown-menu">
-              <a href="" class="dropdown-item">Add Client</a>
-              <a href="" class="dropdown-item">Client List</a>
-            </div>
-
-          </li> -->
-          <!-- <li class="nav-item">
-            <a class="nav-link active" href=""> User Registration</a>
-          </li> -->
-
+         </li>
           <li>              
           <li class="nav-item">
               <a class="nav-link active" href="{% url 'login' %}">Login</a>
             </li>
-          <!-- <li class="nav-item dropdown">
-              <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Project</a>
-              <div class="dropdown-menu">
-                <a href="" class="dropdown-item">Add Project</a>
-                <a href="" class="dropdown-item">Project list</a>
-                </div>
-                </li>
-             -->
-
-
-            
-          
-         
+            <li class="nav-item">
+              <form>
+                {% csrf_token %}
+                <a class="nav-link active" href="{% url 'logout' %}">Logout</a>
+              </form>
+            </li>
         </ul>
         
       </div>

@@ -19,19 +19,20 @@ from django import views
 from django.conf import settings
 from django.contrib import admin
 from django.urls import path,include
-from task.views import delete, home, login_request, subtask,task_list,task,task_details,edit
+from task.views import delete, home, login_request, subtask,task_list,task,task_details,edit,logout_request
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',view=home,name="home"),
     path('login',view=login_request,name="login"),
+    path('logout/',view=logout_request,name="logout"),
     path('tasklist',view=task_list,name="tasklist"),
     path('task',view=task,name="task"),
     path('taskdetails/<int:id>',view=task_details,name="taskdetails"),
     path('delete/<int:id>',view=delete),
     path('edit/<int:id>',view=edit,name="edit"),
     path('subtask',view=subtask,name="subtask"),
-    path('__debug__/', include('debug_toolbar.urls')),
+    # path('__debug__/', include('debug_toolbar.urls')),
 
 
 ]
