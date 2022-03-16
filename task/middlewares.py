@@ -18,7 +18,6 @@ class UnderConstructionMiddleware:
 			return render(request, 'underconstruction.html')
 		else:
 			return render(request,'home.html')
-
 		# print("call From Middleware Before views")
 		# response= render(request, 'underconstruction.html')
 		# # response = HttpResponse("this site is underconstruction")
